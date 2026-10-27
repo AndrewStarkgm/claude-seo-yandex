@@ -27,14 +27,23 @@ metadata:
 
 ## Источники данных (по приоритету)
 
-1. **MCP-инструменты Яндекса в сессии**, если подключены (`webmaster_get_hosts`, `webmaster_get_diagnostics`,
-   `metrika_get_report`, `wordstat_top_requests` и т.п.) - используй их напрямую.
-2. **Скрипты плагина** с OAuth-токеном из `~/.config/claude-seo/yandex-api.json`:
+1. **MCP-сервис с Яндексом, уже подключённый в сессии** (инструменты с именами `webmaster_get_hosts`,
+   `webmaster_get_host_info`, `webmaster_get_diagnostics`, `webmaster_get_search_queries`, `webmaster_get_indexing`,
+   `webmaster_get_sitemaps`, `metrika_get_report`, `metrika_get_counters`, `wordstat_top_requests`,
+   `wordstat_dynamics`, `wordstat_regions` под любым префиксом `mcp__<server>__`). Найди их через ToolSearch
+   ("webmaster", "metrika", "wordstat"). **Если они есть - отдельный токен НЕ нужен**, не предлагай его заводить.
+   Субагенты не получают MCP-инструменты: данные Яндекса собирает основной диалог и передаёт агенту готовыми.
+2. **Скрипты плагина** с OAuth-токеном из `~/.config/claude-seo/yandex-api.json` - только когда сервиса нет:
    ```bash
    "${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run yandex_auth.py --check --json
    ```
-3. Без токена - только краулинговые проверки (robots, sitemap, разметка, регион-сигналы на страницах).
+3. Без обоих - только краулинговые проверки (robots, sitemap, разметка, регион-сигналы на страницах).
    Прямо скажи пользователю, какие выводы без данных Вебмастера/Метрики сделать нельзя.
+
+Ошибка `INVALID_OAUTH_TOKEN` / 403 от сервиса = протух токен **в сервисе**: сообщи пользователю, что его
+нужно обновить там; не переключайся молча на скрипты и не проси новый токен для плагина.
+Сервис может отдавать данные частично (например, Метрика и Вордстат работают, Вебмастер нет) - проверяй
+каждый источник отдельно и называй, какой недоступен.
 
 ## Команды
 

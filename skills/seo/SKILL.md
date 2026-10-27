@@ -84,7 +84,7 @@ When the user invokes `/seo audit`, delegate to subagents in parallel:
 1. Detect business type (SaaS, local, ecommerce, publisher, agency, other)
 2. Spawn subagents: seo-technical, seo-content, seo-schema, seo-sitemap, seo-performance, seo-visual, seo-geo, seo-agentic
 3. If Google API credentials detected (`"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run google_auth.py --check`), also spawn seo-google agent
-3a. If the site is Russian-language (.ru/.рф/.su, `lang="ru"`, Cyrillic content) OR Yandex credentials detected (`"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run yandex_auth.py --check`), also spawn seo-yandex agent. For Russian sites Yandex is usually the main search engine: weigh its findings at least equal to Google's
+3a. If the site is Russian-language (.ru/.рф/.su, `lang="ru"`, Cyrillic content) OR Yandex credentials detected (`"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run yandex_auth.py --check`), also run Yandex data collection. If Yandex MCP tools (`webmaster_*`, `metrika_*`, `wordstat_*`) are connected, collect the data in the main conversation (subagents have no MCP access) and pass it to the seo-yandex agent; otherwise spawn seo-yandex to use the plugin scripts. For Russian sites Yandex is usually the main search engine: weigh its findings at least equal to Google's
 4. If Matomo credentials detected (`"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run matomo_auth.py --check`), also spawn seo-matomo agent (alternative or complement to seo-google's GA4 reports)
 5. If local business detected, also spawn seo-local agent
 6. If local business detected AND DataForSEO MCP available, also spawn seo-maps agent
