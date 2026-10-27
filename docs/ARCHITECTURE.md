@@ -6,7 +6,7 @@ Claude SEO follows Anthropic's official Claude Code skill specification with a m
 
 ## Directory Structure
 
-The plugin ships 26 sub-skills (22 core + 1 orchestrator + 1 framework integration + 2 extension mirrors) and 19 sub-agents (16 core + 1 framework integration + 2 extension mirrors).
+The plugin ships 27 sub-skills (23 core + 1 orchestrator + 1 framework integration + 2 extension mirrors) and 20 sub-agents (17 core + 1 framework integration + 2 extension mirrors).
 
 ```
 ~/.claude/plugins/.../claude-seo/

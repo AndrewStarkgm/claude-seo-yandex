@@ -53,6 +53,7 @@ ALLOWED_CORE_SCRIPTS = frozenset(
         "sitemap_discovery.py", "sync_flow.py", "ucp_check.py", "unlighthouse_run.py",
         "url_safety.py", "validate_backlink_report.py", "verify_backlinks.py",
         "youtube_search.py",
+        "yandex_auth.py", "yandex_metrika.py", "yandex_webmaster.py", "yandex_wordstat.py",
     }
 )
 REDACTIONS = (

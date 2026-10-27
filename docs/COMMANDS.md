@@ -505,6 +505,26 @@ FLOW framework integration: evidence-led prompts for the Find, Leverage, Optimiz
 
 ---
 
+### `/seo yandex [command] [url]`
+
+Yandex SEO for Russian-language sites (fork addition): Yandex.Webmaster, Yandex.Metrika, Wordstat,
+regional ranking and Yandex-specific robots.txt.
+
+```
+/seo yandex setup                       # OAuth token and config (~/.config/claude-seo/yandex-api.json)
+/seo yandex audit <url>                 # ИКС, pages in search, diagnostics, top queries, organic traffic
+/seo yandex hosts                       # Sites in Webmaster, mirrors, verification
+/seo yandex diagnostics <url>           # Webmaster problems with explanations
+/seo yandex queries <url>               # Shows, clicks, CTR, positions
+/seo yandex indexing <url>              # Pages in search and crawl history
+/seo yandex sitemaps <url>              # Sitemaps in Webmaster
+/seo yandex recrawl <url> <file>        # Submit URLs for recrawl within daily quota
+/seo yandex traffic | landings | cities | subdomains   # Metrika organic reports
+/seo yandex wordstat <phrase> [region]  # Demand, related queries, dynamics, regions
+/seo yandex regional <url>              # Site region, Яндекс.Бизнес, city subdomains
+/seo yandex robots <url>                # Yandex group, Clean-param, Host
+```
+
 ### `/seo google [command] [url]`
 
 Google SEO APIs. 4-tier credential system covering PageSpeed Insights, CrUX, CrUX History, Search Console, URL Inspection, Indexing API, GA4, and Keyword Planner.

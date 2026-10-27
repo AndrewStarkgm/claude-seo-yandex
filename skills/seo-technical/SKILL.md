@@ -196,6 +196,16 @@ Google updated its JavaScript SEO documentation in December 2025 with critical c
 - Supported by search engines other than Google
 - Recommend implementation for faster indexing on non-Google engines
 
+### 10. Yandex Specifics (Russian-language sites)
+Run when the site is .ru/.рф or Russian-language. Details: `${CLAUDE_PLUGIN_ROOT}/skills/seo-yandex/references/yandex-rules.md`.
+- **robots.txt groups**: a `User-agent: Yandex` group replaces `User-agent: *` for Yandex entirely. Flag any
+  Disallow present in `*` but missing from the Yandex group (High).
+- **Clean-param** for utm/sort/session/filter params; missing Clean-param + many parameterised URLs = duplicate risk (Medium).
+- `Host:` is deprecated (Info only); mirrors must be glued with 301.
+- Fetch robots.txt live per host - CMSs (Bitrix/Aspro) often serve it by `HTTP_HOST`, not from the web root.
+- Separate mobile templates (Aspro `*-mobile`): Yandex crawls mostly as mobile; verify canonical/meta robots in both.
+- With Yandex credentials, add `/seo yandex diagnostics` findings (FATAL/CRITICAL map to Critical).
+
 ## Agent-Friendly Pages & Agentic Browsing
 
 Agent readiness has its own sub-skill: `/seo agentic <url>` (`seo-agentic`).
@@ -239,6 +249,7 @@ behind every score.
 | Structured Data | pass/warn/fail | XX/100 |
 | JS Rendering | pass/warn/fail | XX/100 |
 | IndexNow | pass/warn/fail | XX/100 |
+| Yandex specifics (RU sites) | pass/warn/fail/n.a. | XX/100 |
 
 ### Critical Issues (fix immediately)
 ### High Priority (fix within 1 week)

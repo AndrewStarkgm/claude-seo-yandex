@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (fork: AndrewStarkgm/claude-seo-yandex)
+- `seo-yandex` skill and agent: Yandex.Webmaster API v4 (ИКС, pages in search, diagnostics with
+  explanations, search queries, indexing history, sitemaps, recrawl within quota), Yandex.Metrika
+  organic reports (by engine, landing page, city, subdomain), Wordstat API (demand, dynamics, regions).
+- Scripts `yandex_auth.py`, `yandex_webmaster.py`, `yandex_metrika.py`, `yandex_wordstat.py` with tests.
+- References: Yandex rules (robots groups, Clean-param, mirrors, regional ranking), regional city
+  subdomains playbook, token setup.
+- Orchestrator spawns `seo-yandex` for Russian-language sites; `seo-technical` gains Yandex specifics,
+  `seo-local` gains Яндекс.Бизнес / site region guidance.
+
 ## [2.5.0] - 2026-10-22
 
 Security and accuracy fixes from a full audit, and Claude Desktop installs again.

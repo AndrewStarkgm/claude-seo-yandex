@@ -221,6 +221,15 @@ Links declining for local pack but remain **~26% of local organic ranking** (Whi
 
 ---
 
+## Russia: Yandex instead of Google (fork addition)
+
+For Russian businesses the map pack and local ranking are driven by **Яндекс.Бизнес** (Yandex Business /
+Справочник) and **2ГИС**, not only GBP. Score GBP-equivalent signals on Яндекс.Бизнес: verified card,
+categories, hours, photos, reviews and replies, link to the site. Site-side: the site region must be set in
+Yandex.Webmaster (`NO_REGIONS` diagnostic), and `NOT_IN_SPRAV` means no linked organisation.
+City subdomains without a physical address rarely get a region assigned - see
+`${CLAUDE_PLUGIN_ROOT}/skills/seo-yandex/references/regional-subdomains.md`. Use `/seo yandex regional <url>` for the full check.
+
 ## AI Search Impact on Local
 
 **Do not duplicate seo-geo analysis.** Provide local-specific AI context and recommend `/seo geo <url>` for full analysis.

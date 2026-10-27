@@ -4,8 +4,8 @@
 
 This repository contains **Claude SEO**, a Tier 4 Claude Code skill for comprehensive
 SEO analysis across all industries. It follows the Agent Skills open standard and the
-3-layer architecture (directive, orchestration, execution). 26 sub-skills (22 core +
-1 orchestrator + 1 framework integration + 2 extension mirrors), 19 sub-agents (16 core +
+3-layer architecture (directive, orchestration, execution). 27 sub-skills (23 core +
+1 orchestrator + 1 framework integration + 2 extension mirrors), 20 sub-agents (17 core +
 1 framework integration + 2 extension mirrors), and an extensible reference
 system cover technical SEO, content quality,
 schema markup, image optimization, sitemap architecture, AI search optimization,
@@ -24,7 +24,7 @@ claude-seo/
   .claude-plugin/
     plugin.json                    # Plugin manifest (v2.5.0)
     marketplace.json               # Marketplace catalog for distribution
-  skills/                            # 26 sub-skills (auto-discovered)
+  skills/                            # 27 sub-skills (auto-discovered)
     seo/                           # Main orchestrator skill
       SKILL.md                     # Entry point, routing table, core rules
       references/                  # On-demand knowledge files (13 files)
@@ -90,11 +90,15 @@ claude-seo/
     seo-flow.md                  # FLOW framework integration
   hooks/                           # Quality gate hooks
     hooks.json                   # PostToolUse schema validation
-  scripts/                         # 60 Python execution scripts
+  scripts/                         # 64 Python execution scripts
     google_auth.py               # Credential management (OAuth, SA, API key, 4-tier detection)
     backlinks_auth.py            # Backlink API credential management (Moz, Bing)
     moz_api.py                   # Moz Link Explorer API (DA/PA, spam, domains, anchors)
     bing_webmaster.py            # Bing Webmaster Tools API (registered-site links/comparison)
+    yandex_auth.py               # Yandex OAuth config + shared API client (fork)
+    yandex_webmaster.py          # Yandex.Webmaster API v4: ИКС, index, diagnostics, queries, recrawl (fork)
+    yandex_metrika.py            # Yandex.Metrika organic traffic by engine/page/city/subdomain (fork)
+    yandex_wordstat.py           # Yandex Wordstat API: demand, dynamics, regions (fork)
     commoncrawl_graph.py         # Common Crawl web graph parser (PageRank, in-degree)
     verify_backlinks.py          # Backlink existence verification crawler
     pagespeed_check.py           # PSI v5 + CrUX API

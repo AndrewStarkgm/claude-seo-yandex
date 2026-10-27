@@ -50,6 +50,7 @@ extension is also installable (see "Optional Extensions" below).
 | `/seo maps [command] [args]` | Maps intelligence (geo-grid, GBP audit, reviews, competitors) |
 | `/seo hreflang [url]` | Hreflang/i18n SEO audit and generation |
 | `/seo google [command] [url]` | Google SEO APIs (GSC, PageSpeed, CrUX, Indexing, GA4) |
+| `/seo yandex [command] [url]` | Yandex SEO: Webmaster (ИКС, индекс, диагностика, запросы), Metrika organic, Wordstat, регион, robots под Яндекс |
 | `/seo backlinks <url>` | Backlink profile analysis (free: Moz, Bing, CC; premium: DataForSEO) |
 | `/seo cluster <seed-keyword>` | SERP-based semantic clustering and content architecture |
 | `/seo sxo <url>` | Search Experience Optimization: page-type analysis, user stories, personas |
@@ -83,6 +84,7 @@ When the user invokes `/seo audit`, delegate to subagents in parallel:
 1. Detect business type (SaaS, local, ecommerce, publisher, agency, other)
 2. Spawn subagents: seo-technical, seo-content, seo-schema, seo-sitemap, seo-performance, seo-visual, seo-geo, seo-agentic
 3. If Google API credentials detected (`"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run google_auth.py --check`), also spawn seo-google agent
+3a. If the site is Russian-language (.ru/.рф/.su, `lang="ru"`, Cyrillic content) OR Yandex credentials detected (`"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run yandex_auth.py --check`), also spawn seo-yandex agent. For Russian sites Yandex is usually the main search engine: weigh its findings at least equal to Google's
 4. If Matomo credentials detected (`"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run matomo_auth.py --check`), also spawn seo-matomo agent (alternative or complement to seo-google's GA4 reports)
 5. If local business detected, also spawn seo-local agent
 6. If local business detected AND DataForSEO MCP available, also spawn seo-maps agent
@@ -233,8 +235,8 @@ Weighted aggregate of all categories:
 
 ## Sub-Skills
 
-This skill orchestrates 25 sub-skills (22 core + 1 framework integration + 2 extension
-mirrors). The orchestrator itself (`seo`) is the 26th in `skills/`, but does not
+This skill orchestrates 26 sub-skills (23 core + 1 framework integration + 2 extension
+mirrors). The orchestrator itself (`seo`) is the 27th in `skills/`, but does not
 orchestrate itself, so it is not enumerated below.
 
 1. **seo-audit** -- Full website audit with parallel delegation
@@ -262,6 +264,7 @@ orchestrate itself, so it is not enumerated below.
 23. **seo-image-gen** -- AI image generation for SEO assets via Gemini (extension mirror)
 24. **seo-flow** -- FLOW framework integration (Find -> Leverage -> Optimize -> Win, 41 AI prompts, CC BY 4.0)
 25. **seo-agentic** -- Agent readiness: Lighthouse Agentic Browsing, accessibility tree for agents, AI agent access policy, llms.txt, Markdown, ai-catalog.json, WebMCP
+26. **seo-yandex** -- Yandex SEO: Webmaster API, Metrika organic, Wordstat, regional ranking, Yandex robots.txt (fork addition)
 
 ### Optional Extensions
 
@@ -298,6 +301,7 @@ For parallel analysis during audits:
 - `seo-local` -- GBP signals, NAP consistency, reviews, local schema, industry-specific local factors (conditional: spawned when Local Service detected)
 - `seo-maps` -- Geo-grid rank tracking, GBP audit, review intelligence, competitor radius mapping (conditional: spawned when Local Service detected AND DataForSEO MCP available)
 - `seo-google` -- CWV field data, URL indexation status, organic traffic trends (conditional: spawned when Google API credentials detected)
+- `seo-yandex` -- ИКС, pages in Yandex search, Webmaster diagnostics, Yandex organic, regional signals, Yandex robots.txt groups (conditional: Russian-language site or Yandex credentials detected)
 - `seo-backlinks` -- Backlink profile data: DA/PA, referring domains, anchor text, toxic links (conditional: spawned when Moz/Bing API keys detected or always for CC domain-level metrics)
 - `seo-cluster` -- Semantic clustering analysis (conditional: content strategy detected)
 - `seo-sxo` -- Page-type mismatch, user stories, persona scoring (always in full audits)
